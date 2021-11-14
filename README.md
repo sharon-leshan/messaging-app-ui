@@ -1,4 +1,4 @@
-[![dating.png](https://i.postimg.cc/rwgP1nxN/dating.png)](https://messaging-app-ui.netlify.app/)
+[![messaging.png](https://i.postimg.cc/50wF8vv8/messaging.png)](https://messaging-app-ui.netlify.app/)
 
 ## Technologies
 - React
