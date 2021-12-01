@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, InputAdornment } from "@material-ui/core";
 import {
   AttachFile,
   MoreVert,
@@ -9,9 +9,22 @@ import {
 import MicIcon from "@material-ui/icons/Mic";
 import "./Chat.css";
 import "./Chat.css";
+import axios from "axios";
 
 const Chat = ({messages}) => {
   const [seed, setSeed] = useState("");
+  const [input, setInput] = useState("")
+
+  const sendMessage = async (e) => {
+    e.preventDefault()
+    await axios.post('/messages/new', {
+      message: InputAdornment,
+      name: "thewebdev",
+      timestamp:new Date().toUTCString(),
+      received: true
+    })
+    setInput("")
+  }
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -45,41 +58,14 @@ const Chat = ({messages}) => {
               </span>
             </p>
           ))}
-        {/* <p className="chat__message">
-          <span className="chat__name">Maleo</span>
-          Hello Sharon!
-          <span className="chat__timestamp">
-            {new Date("2021-12-01T11:43:20.584Z").toUTCString()}
-          </span>
-        </p>
-        <p className="chat__message chat__receiver">
-           */}
-          {/* <span className="chat__name"> Sharon</span>
-          Hey Maleo! What's poppin
-          <span className="chat__timestamp">
-            {new Date("2021-12-01T11:45:10.584Z").toUTCString()}
-          </span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Maleo</span>
-          Nothing much, How are you doing.
-          <span className="chat__timestamp">
-            {new Date("2021-12-01T11:50:55.584Z").toUTCString()}
-          </span>
-        </p>
-        <p className="chat__message chat__receiver">
-          <span className="chat__name"> Sharon</span>
-          <span className="chat__timestamp">
-            {new Date("2021-12-01T11:55:30.584Z").toUTCString()}
-          </span>
-        </p>
-      // </div> */}
+        
       </div>
       <div className="chat__footer">
         <InsertEmoticon />
         <form>
-          <input placeholder="Type a message" type="text" />
-          <button type="submit">Send a message</button>
+          <input value={input}
+          onChange={e => setInput(e.target.value)} />
+          <button onClick ={sendMessage} type="submit">Send a message</button>
         </form>
         <MicIcon />
       </div>
