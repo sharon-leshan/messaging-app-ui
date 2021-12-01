@@ -10,7 +10,7 @@ import MicIcon from "@material-ui/icons/Mic";
 import "./Chat.css";
 import "./Chat.css";
 
-const Chat = () => {
+const Chat = ({messages}) => {
   const [seed, setSeed] = useState("");
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
@@ -36,7 +36,16 @@ const Chat = () => {
         </div>
       </div>
       <div className="chat__body">
-        <p className="chat__message">
+      {messages.map(message => (
+            <p className={`chat__message ${message.received && 'chat__receiver'}`}>
+              <span className="chat__name">{message.name} </span>
+              {message.message}
+              <span className="chat__timestamp">
+                {message.timestamp}
+              </span>
+            </p>
+          ))}
+        {/* <p className="chat__message">
           <span className="chat__name">Maleo</span>
           Hello Sharon!
           <span className="chat__timestamp">
@@ -44,7 +53,8 @@ const Chat = () => {
           </span>
         </p>
         <p className="chat__message chat__receiver">
-          <span className="chat__name"> Sharon</span>
+           */}
+          {/* <span className="chat__name"> Sharon</span>
           Hey Maleo! What's poppin
           <span className="chat__timestamp">
             {new Date("2021-12-01T11:45:10.584Z").toUTCString()}
@@ -63,6 +73,7 @@ const Chat = () => {
             {new Date("2021-12-01T11:55:30.584Z").toUTCString()}
           </span>
         </p>
+      // </div> */}
       </div>
       <div className="chat__footer">
         <InsertEmoticon />
