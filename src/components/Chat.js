@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, IconButton, InputAdornment } from "@material-ui/core";
+import { Avatar, IconButton } from "@material-ui/core";
 import {
   AttachFile,
   MoreVert,
   SearchOutlined,
   InsertEmoticon,
+  Mic,
 } from "@material-ui/icons";
-import MicIcon from "@material-ui/icons/Mic";
 import "./Chat.css";
-import "./Chat.css";
-import axios from "axios";
-import {useStateValue} from './StateProvider';
+import axios from "./axios";
+import { useStateValue } from "./StateProvider";
 
-const Chat = ({messages}) => {
+const Chat = ({ messages }) => {
   const [seed, setSeed] = useState("");
-  const [input, setInput] = useState("")
-  const [{user}, dispatch] = useStateValue()
+  const [input, setInput] = useState("");
+  const [{ user }, dispatch] = useStateValue();
 
   const sendMessage = async (e) => {
-    e.preventDefault()
-    await axios.post('/messages/new', {
+    e.preventDefault();
+    await axios.post("/messages/new", {
       message: input,
-      name: user.displayname,
-      timestamp:new Date().toUTCString(),
-      received: true
-    })
-    setInput("")
-  }
+      name: user.displayName,
+      timestamp: new Date().toUTCString(),
+      received: true,
+    });
+    setInput("");
+  };
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
@@ -37,7 +36,7 @@ const Chat = ({messages}) => {
         <Avatar src={`https://avatars.dicebear.com/api/human/b${seed}.svg`} />
         <div className="chat__headerInfo">
           <h3>Maleo</h3>
-          <p>Last seen at{""} {messages[messages.length -1]?.timestamp} </p>
+          <p>Last seen at {messages[messages.length - 1]?.timestamp} </p>
         </div>
         <div className="chat__headerRight">
           <IconButton>
@@ -52,25 +51,31 @@ const Chat = ({messages}) => {
         </div>
       </div>
       <div className="chat__body">
-      {messages.map(message => (
-            <p className={`chat__message ${message.name === user.displayname && 'chat__receiver'}`}>
-              <span className="chat__name">{message.name} </span>
-              {message.message}
-              <span className="chat__timestamp">
-                {message.timestamp}
-              </span>
-            </p>
-          ))}
-        
+        {messages.map((message,i=0) => (
+          <p key={i++}
+            className={`chat__message ${
+              message.name === user.displayName && "chat__receiver"
+            }`}
+          >
+            <span className="chat__name">{message.name} </span>
+            {message.message}
+            <span className="chat__timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
       <div className="chat__footer">
         <InsertEmoticon />
         <form>
-          <input value={input}
-          onChange={e => setInput(e.target.value)} />
-          <button onClick ={sendMessage} type="submit">Send a message</button>
+          <input
+            value={input}
+            placeholder="Type a message"
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button onClick={sendMessage} type="submit">
+            Send a message
+          </button>
         </form>
-        <MicIcon />
+        <Mic />
       </div>
     </div>
   );
