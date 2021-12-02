@@ -6,10 +6,10 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { SearchOutlined, MoreVert } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat";
 import "./Searchbar.css";
-import {useStateValue} from './StateProvider';
+import { useStateValue } from "./StateProvider";
 
-const Sidebar = ({messages}) => {
-  const [{user}, dispatch]= useStateValue()
+const Sidebar = ({ messages }) => {
+  const [{ user }, dispatch] = useStateValue();
 
   return (
     <div className="sidebar">
