@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "https://messaging-app-backend-maleo.herokuapp.com"
-})
+  baseURL: "http://localhost:9000",
+});
 
-export default instance 
+export default instance;
