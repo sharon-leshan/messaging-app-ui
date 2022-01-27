@@ -2,7 +2,7 @@
 ## Technologies
 [![messaging2.png](https://i.postimg.cc/P555Khvp/messaging2.png)](https://messaging-app-mern-ffe37.web.app/)
 
-- React
+- Reactjs
 - Firebase
 - Node
 - Express
