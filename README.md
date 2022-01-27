@@ -4,7 +4,7 @@
 
 - Reactjs
 - Firebase
-- Node
+- Nodejs
 - Express
 - Pusher
 - Google Authentication
